@@ -10,11 +10,17 @@ export const Pressable = ({ onPress, onLongPress, onPressIn, ...props }: Pressab
   const isInteractive = !!(onPress || onLongPress)
 
   const handlePressIn: typeof onPressIn = isInteractive
-    ? (e) => { selection(); onPressIn?.(e) }
+    ? (e) => {
+        selection()
+        onPressIn?.(e)
+      }
     : onPressIn
 
   const handleLongPress: typeof onLongPress = onLongPress
-    ? (e) => { notification(); onLongPress(e) }
+    ? (e) => {
+        notification()
+        onLongPress(e)
+      }
     : undefined
 
   return <RNPressable {...props} onPress={onPress} onPressIn={handlePressIn} onLongPress={handleLongPress} />

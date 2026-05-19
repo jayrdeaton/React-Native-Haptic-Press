@@ -12,12 +12,18 @@ export const Card = (props: CardProps) => {
   const isInteractive = !!(onPress || onLongPress)
 
   const handlePressIn = isInteractive
-    ? (e: GestureResponderEvent) => { selection(); onPressIn?.(e) }
+    ? (e: GestureResponderEvent) => {
+        selection()
+        onPressIn?.(e)
+      }
     : onPressIn
 
   // Paper Card.onLongPress is () => void (no event arg)
   const handleLongPress = onLongPress
-    ? () => { notification(); onLongPress() }
+    ? () => {
+        notification()
+        onLongPress()
+      }
     : undefined
 
   // Paper's Card union type requires a cast when spreading + overriding handlers

@@ -10,11 +10,17 @@ export const TouchableOpacity = ({ onPress, onLongPress, onPressIn, ...props }: 
   const isInteractive = !!(onPress || onLongPress)
 
   const handlePressIn: typeof onPressIn = isInteractive
-    ? (e: GestureResponderEvent) => { selection(); onPressIn?.(e) }
+    ? (e: GestureResponderEvent) => {
+        selection()
+        onPressIn?.(e)
+      }
     : onPressIn
 
   const handleLongPress: typeof onLongPress = onLongPress
-    ? (e: GestureResponderEvent) => { notification(); onLongPress(e) }
+    ? (e: GestureResponderEvent) => {
+        notification()
+        onLongPress(e)
+      }
     : undefined
 
   return <RNTouchableOpacity {...props} onPress={onPress} onPressIn={handlePressIn} onLongPress={handleLongPress} />

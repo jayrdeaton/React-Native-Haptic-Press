@@ -37,12 +37,7 @@ export const useVibration = () => {
         Vibration.vibrate(duration)
         return
       }
-      const style =
-        duration <= SHORT_DURATION
-          ? haptics.ImpactFeedbackStyle.Light
-          : duration <= MEDIUM_DURATION
-            ? haptics.ImpactFeedbackStyle.Medium
-            : haptics.ImpactFeedbackStyle.Heavy
+      const style = duration <= SHORT_DURATION ? haptics.ImpactFeedbackStyle.Light : duration <= MEDIUM_DURATION ? haptics.ImpactFeedbackStyle.Medium : haptics.ImpactFeedbackStyle.Heavy
       void haptics.impactAsync(style)
     },
     [isIOS]
@@ -114,6 +109,6 @@ export const useVibration = () => {
     forceShort,
     forceMedium,
     forceLong,
-    forceDouble,
+    forceDouble
   }
 }

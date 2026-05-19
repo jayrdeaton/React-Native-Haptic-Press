@@ -10,11 +10,17 @@ export const FAB = ({ onPress, onLongPress, ...props }: FABProps) => {
   const { selection, notification } = useVibration()
 
   const handlePress: typeof onPress = onPress
-    ? (e: GestureResponderEvent) => { selection(); onPress(e) }
+    ? (e: GestureResponderEvent) => {
+        selection()
+        onPress(e)
+      }
     : undefined
 
   const handleLongPress: typeof onLongPress = onLongPress
-    ? (e: GestureResponderEvent) => { notification(); onLongPress(e) }
+    ? (e: GestureResponderEvent) => {
+        notification()
+        onLongPress(e)
+      }
     : undefined
 
   return <PaperFAB {...props} onPress={handlePress} onLongPress={handleLongPress} />
