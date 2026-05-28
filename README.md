@@ -147,6 +147,25 @@ All methods respect the `HapticPressProvider` `enabled` flag. The `force*` varia
 
 On iOS, methods use `expo-haptics` native APIs. On Android, they fall back to `Vibration.vibrate()` with mapped durations.
 
+## Usage with `@rific/auto-paper`
+
+Paper wrappers automatically inherit the theme from `@rific/auto-paper`'s `Provider` — no extra wiring needed.
+
+```tsx
+import { Provider } from '@rific/auto-paper'
+import { HapticPressProvider, Button } from '@rific/haptic-press'
+
+export function App() {
+  return (
+    <Provider appearance="system" color="#FF6B6B">
+      <HapticPressProvider enabled={vibrate}>
+        <Button onPress={handlePress}>Themed + Haptic</Button>
+      </HapticPressProvider>
+    </Provider>
+  )
+}
+```
+
 ## Platform notes
 
 - **iOS** — uses `expo-haptics` (`selectionAsync`, `notificationAsync`, `impactAsync`)
