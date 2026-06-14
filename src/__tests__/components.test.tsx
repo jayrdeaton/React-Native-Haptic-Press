@@ -21,11 +21,11 @@ const MockFAB = Paper.FAB as unknown as jest.Mock
 const mockEvent = {} as any
 
 const enabled = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider enabled={true}>{children}</HapticPressProvider>
+  <HapticPressProvider value={{ vibrate: true }}>{children}</HapticPressProvider>
 )
 
 const disabled = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider enabled={false}>{children}</HapticPressProvider>
+  <HapticPressProvider value={{ vibrate: false }}>{children}</HapticPressProvider>
 )
 
 beforeEach(() => {

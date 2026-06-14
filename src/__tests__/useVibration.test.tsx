@@ -10,11 +10,11 @@ const mockedHaptics = haptics as jest.Mocked<typeof haptics>
 const mockedVibration = Vibration as jest.Mocked<typeof Vibration>
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider enabled={true}>{children}</HapticPressProvider>
+  <HapticPressProvider value={{ vibrate: true }}>{children}</HapticPressProvider>
 )
 
 const disabledWrapper = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider enabled={false}>{children}</HapticPressProvider>
+  <HapticPressProvider value={{ vibrate: false }}>{children}</HapticPressProvider>
 )
 
 beforeEach(() => {
