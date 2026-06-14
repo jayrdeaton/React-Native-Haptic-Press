@@ -13,9 +13,9 @@ describe('HapticPressProvider', () => {
     expect(result.current.settings.vibrate).toBe(true)
   })
 
-  it('applies value prop as initial settings', () => {
+  it('applies initialValue prop as initial settings', () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <HapticPressProvider value={{ vibrate: false }}>{children}</HapticPressProvider>
+      <HapticPressProvider initialValue={{ vibrate: false }}>{children}</HapticPressProvider>
     )
     const { result } = renderHook(() => useHapticSettings(), { wrapper })
     expect(result.current.settings.vibrate).toBe(false)

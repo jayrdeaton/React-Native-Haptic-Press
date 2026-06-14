@@ -49,10 +49,8 @@ Wrap once at your app root and pass the user's settings — every component insi
 import { HapticPressProvider } from '@rific/haptic-press'
 
 export function App() {
-  const [settings, setSettings] = useState({ vibrate: true })
-
   return (
-    <HapticPressProvider value={settings} onChange={setSettings}>
+    <HapticPressProvider initialValue={{ vibrate: true }} onChange={saveSettings}>
       <RootNavigator />
     </HapticPressProvider>
   )
@@ -114,7 +112,7 @@ All components are drop-in replacements with identical prop types to their origi
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `value` | `Partial<HapticSettings>` | `defaultHapticSettings` | Initial settings. Merged with defaults — partial is fine. |
+| `initialValue` | `Partial<HapticSettings>` | `defaultHapticSettings` | Initial settings. Merged with defaults — partial is fine. |
 | `onChange` | `(settings: HapticSettings) => void` | — | Called with the full settings object whenever settings change. |
 | `children` | `ReactNode` | — | |
 
@@ -165,7 +163,7 @@ export function App() {
 
   return (
     <HapticPressProvider
-      value={settings}
+      initialValue={settings}
       onChange={(next) => dispatch(hapticActions.initialize(next))}
     >
       <RootNavigator />
@@ -217,7 +215,7 @@ import { HapticPressProvider, Button } from '@rific/haptic-press'
 export function App() {
   return (
     <Provider appearance="system" color="#FF6B6B">
-      <HapticPressProvider value={{ vibrate }}>
+      <HapticPressProvider initialValue={{ vibrate }}>
         <Button onPress={handlePress}>Themed + Haptic</Button>
       </HapticPressProvider>
     </Provider>
