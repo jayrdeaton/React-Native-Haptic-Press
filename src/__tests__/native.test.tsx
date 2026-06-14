@@ -14,11 +14,11 @@ const MockTouchableHighlight = RNTouchableHighlight as unknown as jest.Mock
 const mockEvent = {} as any
 
 const enabled = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider value={{ vibrate: true }}>{children}</HapticPressProvider>
+  <HapticPressProvider initialValue={{ vibrate: true }}>{children}</HapticPressProvider>
 )
 
 const disabled = ({ children }: { children: React.ReactNode }) => (
-  <HapticPressProvider value={{ vibrate: false }}>{children}</HapticPressProvider>
+  <HapticPressProvider initialValue={{ vibrate: false }}>{children}</HapticPressProvider>
 )
 
 const lastProps = (mock: jest.Mock) => mock.mock.calls[mock.mock.calls.length - 1][0]
