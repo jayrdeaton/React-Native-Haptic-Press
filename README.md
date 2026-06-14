@@ -43,16 +43,16 @@ export function MyScreen() {
 
 ### With a provider (user-controlled toggle)
 
-Wrap once at your app root and pass the user's vibrate setting — every component inside reads it automatically.
+Wrap once at your app root and pass the user's settings — every component inside reads them automatically.
 
 ```tsx
 import { HapticPressProvider } from '@rific/haptic-press'
 
 export function App() {
-  const { vibrate } = useSettings()
+  const [settings, setSettings] = useState({ vibrate: true })
 
   return (
-    <HapticPressProvider enabled={vibrate}>
+    <HapticPressProvider value={settings} onChange={setSettings}>
       <RootNavigator />
     </HapticPressProvider>
   )
@@ -114,8 +114,67 @@ All components are drop-in replacements with identical prop types to their origi
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `enabled` | `boolean` | `true` | Whether haptics fire. Controls all wrapped components below in the tree. |
+| `value` | `Partial<HapticSettings>` | `defaultHapticSettings` | Initial settings. Merged with defaults — partial is fine. |
+| `onChange` | `(settings: HapticSettings) => void` | — | Called with the full settings object whenever settings change. |
 | `children` | `ReactNode` | — | |
+
+```ts
+type HapticSettings = {
+  vibrate: boolean  // default: true
+}
+```
+
+### `useHapticSettings`
+
+Read or update settings from anywhere inside the provider:
+
+```tsx
+import { useHapticSettings } from '@rific/haptic-press'
+
+export function SettingsScreen() {
+  const { settings, set } = useHapticSettings()
+
+  return (
+    <Switch
+      value={settings.vibrate}
+      onValueChange={(value) => set({ vibrate: value })}
+    />
+  )
+}
+```
+
+### Redux integration
+
+If your app uses Redux, wire the included slice to your store and bridge it to the provider:
+
+```tsx
+import { configureStore } from '@reduxjs/toolkit'
+import { hapticReducer, hapticActions, HapticPressProvider } from '@rific/haptic-press'
+import { useSelector, useDispatch } from 'react-redux'
+
+const store = configureStore({
+  reducer: {
+    haptic: hapticReducer,
+    // ...
+  }
+})
+
+export function App() {
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.haptic)
+
+  return (
+    <HapticPressProvider
+      value={settings}
+      onChange={(next) => dispatch(hapticActions.initialize(next))}
+    >
+      <RootNavigator />
+    </HapticPressProvider>
+  )
+}
+```
+
+Available actions: `hapticActions.initialize(settings)` (replace all), `hapticActions.setVibrate(boolean)`.
 
 ## `useVibration`
 
@@ -158,7 +217,7 @@ import { HapticPressProvider, Button } from '@rific/haptic-press'
 export function App() {
   return (
     <Provider appearance="system" color="#FF6B6B">
-      <HapticPressProvider enabled={vibrate}>
+      <HapticPressProvider value={{ vibrate }}>
         <Button onPress={handlePress}>Themed + Haptic</Button>
       </HapticPressProvider>
     </Provider>
