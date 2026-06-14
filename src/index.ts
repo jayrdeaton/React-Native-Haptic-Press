@@ -1,9 +1,9 @@
 export { HapticPressProvider } from './HapticPressProvider'
 export type { HapticSettings } from './HapticSettingsContext'
 export { defaultHapticSettings, HapticSettingsContext } from './HapticSettingsContext'
+export { hapticActions, hapticReducer } from './redux/hapticSlice'
 export { useHapticSettings } from './useHapticSettings'
 export { useVibration } from './useVibration'
-export { hapticActions, hapticReducer } from './redux/hapticSlice'
 
 // Native wrappers
 export { Pressable, type PressableProps } from './components/native/Pressable'

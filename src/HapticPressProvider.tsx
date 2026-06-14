@@ -1,6 +1,6 @@
 import { type ReactNode, useCallback, useContext, useState } from 'react'
 
-import { defaultHapticSettings, HapticSettingsContext, type HapticSettings } from './HapticSettingsContext'
+import { defaultHapticSettings, type HapticSettings, HapticSettingsContext } from './HapticSettingsContext'
 
 export type HapticPressProviderProps = {
   value?: Partial<HapticSettings>
