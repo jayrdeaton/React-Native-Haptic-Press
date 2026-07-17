@@ -1,11 +1,13 @@
 import { type GestureResponderEvent } from 'react-native'
-import { Chip as PaperChip, type ChipProps } from 'react-native-paper'
+import type { ChipProps } from 'react-native-paper'
 
+import { requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
 export type { ChipProps }
 
 export const Chip = ({ onPress, onLongPress, onPressIn, ...props }: ChipProps) => {
+  const { Chip: PaperChip } = requirePaper('Chip')
   const { selection, notification } = useVibration()
 
   const isInteractive = !!(onPress || onLongPress)

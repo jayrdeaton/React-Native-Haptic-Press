@@ -1,11 +1,13 @@
 import { type GestureResponderEvent } from 'react-native'
-import { Card as PaperCard, type CardProps } from 'react-native-paper'
+import type { CardProps } from 'react-native-paper'
 
+import { paper, requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
 export type { CardProps }
 
-export const Card = (props: CardProps) => {
+const CardComponent = (props: CardProps) => {
+  const { Card: PaperCard } = requirePaper('Card')
   const { selection, notification } = useVibration()
   const { onPress, onLongPress, onPressIn } = props
 
@@ -31,7 +33,20 @@ export const Card = (props: CardProps) => {
   return <PaperCard {...(props as any)} onPressIn={handlePressIn} onLongPress={handleLongPress} />
 }
 
-Card.Content = PaperCard.Content
-Card.Title = PaperCard.Title
-Card.Actions = PaperCard.Actions
-Card.Cover = PaperCard.Cover
+// Statics are only attached when react-native-paper is installed (optional peer)
+export const Card = Object.assign(
+  CardComponent,
+  paper
+    ? {
+        Content: paper.Card.Content,
+        Title: paper.Card.Title,
+        Actions: paper.Card.Actions,
+        Cover: paper.Card.Cover
+      }
+    : {}
+) as typeof CardComponent & {
+  Content: (typeof import('react-native-paper'))['Card']['Content']
+  Title: (typeof import('react-native-paper'))['Card']['Title']
+  Actions: (typeof import('react-native-paper'))['Card']['Actions']
+  Cover: (typeof import('react-native-paper'))['Card']['Cover']
+}

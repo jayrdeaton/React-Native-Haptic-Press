@@ -12,11 +12,13 @@ npm install @rific/haptic-press
 
 ```sh
 # Required
-npm install expo-haptics react react-native
+npm install expo-haptics
 
 # Optional — only needed if using Paper wrappers
 npm install react-native-paper
 ```
+
+Without `react-native-paper`, importing the package is safe; rendering a Paper wrapper (`Button`, `Card`, `FAB`, etc.) throws a descriptive error. The exported Redux slice has no dependency on `@reduxjs/toolkit` — it works with RTK stores, vanilla Redux, or no Redux at all.
 
 ## Usage
 

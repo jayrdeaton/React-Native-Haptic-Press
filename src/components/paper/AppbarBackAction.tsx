@@ -1,10 +1,10 @@
-import { Appbar } from 'react-native-paper'
-
+import { requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
-export type AppbarBackActionProps = React.ComponentProps<typeof Appbar.BackAction>
+export type AppbarBackActionProps = React.ComponentProps<(typeof import('react-native-paper'))['Appbar']['BackAction']>
 
 export const AppbarBackAction = ({ onPress, ...props }: AppbarBackActionProps) => {
+  const { Appbar } = requirePaper('AppbarBackAction')
   const { selection } = useVibration()
 
   const handlePress = onPress

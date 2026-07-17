@@ -1,11 +1,13 @@
 import { type GestureResponderEvent } from 'react-native'
-import { TouchableRipple as PaperTouchableRipple, type TouchableRippleProps } from 'react-native-paper'
+import type { TouchableRippleProps } from 'react-native-paper'
 
+import { requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
 export type { TouchableRippleProps }
 
 export const TouchableRipple = ({ onPress, onLongPress, onPressIn, ...props }: TouchableRippleProps) => {
+  const { TouchableRipple: PaperTouchableRipple } = requirePaper('TouchableRipple')
   const { selection, notification } = useVibration()
 
   const isInteractive = !!(onPress || onLongPress)
