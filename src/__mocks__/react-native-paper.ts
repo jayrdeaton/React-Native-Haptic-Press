@@ -1,5 +1,3 @@
-import React from 'react'
-
 const stub = (props: Record<string, unknown>) => null
 
 // Capture props so tests can inspect what handlers were wired

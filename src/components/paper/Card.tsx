@@ -1,10 +1,25 @@
+import type { ComponentType } from 'react'
 import { type GestureResponderEvent } from 'react-native'
-import type { CardProps } from 'react-native-paper'
 
 import { paper, requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
-export type { CardProps }
+// Local mirror of react-native-paper's Card props, limited to what this wrapper touches
+// plus a pass-through index signature — see src/paper.ts's PaperModuleShape for the same
+// pattern. This intentionally avoids `import type { CardProps } from 'react-native-paper'`,
+// which forces TypeScript to resolve the peer's real type declarations even for consumers
+// who never installed the optional "react-native-paper" peer dep.
+export type CardProps = {
+  onPress?: (e: GestureResponderEvent) => void
+  onPressIn?: (e: GestureResponderEvent) => void
+  // Paper's Card.onLongPress is () => void (no event arg)
+  onLongPress?: () => void
+  [prop: string]: unknown
+}
+
+// Local stand-in for react-native-paper's Card.Content/Title/Actions/Cover statics —
+// matches PaperModuleShape['Card'] in src/paper.ts.
+type PaperCardStatic = ComponentType<{ [prop: string]: unknown }>
 
 const CardComponent = (props: CardProps) => {
   const { Card: PaperCard } = requirePaper('Card')
@@ -44,9 +59,9 @@ export const Card = Object.assign(
         Cover: paper.Card.Cover
       }
     : {}
-) as typeof CardComponent & {
-  Content: (typeof import('react-native-paper'))['Card']['Content']
-  Title: (typeof import('react-native-paper'))['Card']['Title']
-  Actions: (typeof import('react-native-paper'))['Card']['Actions']
-  Cover: (typeof import('react-native-paper'))['Card']['Cover']
+) as unknown as typeof CardComponent & {
+  Content: PaperCardStatic
+  Title: PaperCardStatic
+  Actions: PaperCardStatic
+  Cover: PaperCardStatic
 }

@@ -1,10 +1,20 @@
 import { type GestureResponderEvent } from 'react-native'
-import type { IconButtonProps } from 'react-native-paper'
 
 import { requirePaper } from '../../paper'
 import { useVibration } from '../../useVibration'
 
-export type { IconButtonProps }
+// Local mirror of react-native-paper's IconButton props, limited to what this wrapper
+// touches plus a pass-through index signature — see src/paper.ts's PaperModuleShape for
+// the same pattern. This intentionally avoids `import type { IconButtonProps } from
+// 'react-native-paper'`, which forces TypeScript to resolve the peer's real type
+// declarations even for consumers who never installed the optional "react-native-paper"
+// peer dep.
+export type IconButtonProps = {
+  onPress?: (e: GestureResponderEvent) => void
+  onPressIn?: (e: GestureResponderEvent) => void
+  onLongPress?: (e: GestureResponderEvent) => void
+  [prop: string]: unknown
+}
 
 export const IconButton = ({ onPress, onLongPress, onPressIn, ...props }: IconButtonProps) => {
   const { IconButton: PaperIconButton } = requirePaper('IconButton')
