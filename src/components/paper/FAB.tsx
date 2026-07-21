@@ -9,8 +9,11 @@ import { useVibration } from '../../useVibration'
 // which forces TypeScript to resolve the peer's real type declarations even for consumers
 // who never installed the optional "react-native-paper" peer dep.
 export type FABProps = {
+  mode?: 'flat' | 'elevated'
   onPress?: (e: GestureResponderEvent) => void
   onLongPress?: (e: GestureResponderEvent) => void
+  size?: 'small' | 'medium' | 'large'
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'surface'
   [prop: string]: unknown
 }
 

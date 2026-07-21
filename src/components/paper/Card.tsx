@@ -10,6 +10,10 @@ import { useVibration } from '../../useVibration'
 // which forces TypeScript to resolve the peer's real type declarations even for consumers
 // who never installed the optional "react-native-paper" peer dep.
 export type CardProps = {
+  // Paper's real type discriminates 'outlined' as required-with-mode vs optional for
+  // 'elevated'/'contained' — simplified to a plain optional union here, same tradeoff
+  // as onLongPress below, to avoid mirroring the full discriminated-union shape.
+  mode?: 'outlined' | 'elevated' | 'contained'
   onPress?: (e: GestureResponderEvent) => void
   onPressIn?: (e: GestureResponderEvent) => void
   // Paper's Card.onLongPress is () => void (no event arg)

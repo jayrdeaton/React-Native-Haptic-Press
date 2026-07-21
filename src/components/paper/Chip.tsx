@@ -9,6 +9,7 @@ import { useVibration } from '../../useVibration'
 // which forces TypeScript to resolve the peer's real type declarations even for consumers
 // who never installed the optional "react-native-paper" peer dep.
 export type ChipProps = {
+  mode?: 'flat' | 'outlined'
   onPress?: (e: GestureResponderEvent) => void
   onPressIn?: (e: GestureResponderEvent) => void
   // Paper's Chip.onLongPress is () => void (no event arg)

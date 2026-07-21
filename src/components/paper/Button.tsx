@@ -9,6 +9,7 @@ import { useVibration } from '../../useVibration'
 // which forces TypeScript to resolve the peer's real type declarations even for consumers
 // who never installed the optional "react-native-paper" peer dep.
 export type ButtonProps = {
+  mode?: 'text' | 'outlined' | 'contained' | 'elevated' | 'contained-tonal'
   onPress?: (e: GestureResponderEvent) => void
   onPressIn?: (e: GestureResponderEvent) => void
   onLongPress?: (e: GestureResponderEvent) => void
